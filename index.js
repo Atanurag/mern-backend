@@ -6,6 +6,8 @@ const cors=require("cors")
 const app=express();
 //for frontend i have used stackblitz because replit can run single port at once
 //middleware for sending body part
+//starting mongodb connection
+connectionToMongo()
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 //middleware for cors policy
@@ -19,10 +21,8 @@ app.use(cors());
 //   allowedHeaders: ["Content-Type"]
 //   })
 // )
-//starting mongodb connection
-connectionToMongo()
 app.get("/node",(req,res)=>{
-  res.status(300).send("hello backend")
+  res.status(300).send("welcome to backend")
 })
 // into this routes
 app.use("/books",bookRoute)
