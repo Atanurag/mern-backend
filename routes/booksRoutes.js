@@ -35,6 +35,9 @@ Rou.get("/mybook/:uid",async(req,res)=>{
  // console.log(req.params.uid)
 try{
   let books=await book.find({uniqueID:req.params.uid});
+  if(!books.length>0){
+  return  res.status(400).json({message:`book not found with uniqueID:${req.params.uid}`})
+  }
  // console.log(books)
   return res.status(200).json({data:books,count:books.length})
 }
