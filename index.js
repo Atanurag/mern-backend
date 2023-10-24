@@ -4,6 +4,7 @@ const {book} =require("./model/booksModel.js");
 const bookRoute=require("./routes/booksRoutes");
 const cors=require("cors")
 const app=express();
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 //for frontend i have used stackblitz because replit can run single port at once
 //middleware for sending body part
 //starting mongodb connection
@@ -24,6 +25,18 @@ app.use(cors());
 app.get("/node",(req,res)=>{
   res.status(300).send("welcome to backend")
 })
+//cricket st
+app.get('/a', async (req, res) => {
+  try {
+    const apiUrl = 'https://cricket.sportmonks.com/api/v2.0/countries?api_token=3YvOGBxfpVp5rBLAJM6OHIYtUUNXVT9xgENN5C0vswNA1wuIfMoMRqSQe8jh&filter[name]=pakistan';
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+//cricket end
 // into this routes
 app.use("/books",bookRoute)
 
