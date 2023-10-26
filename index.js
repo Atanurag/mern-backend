@@ -25,10 +25,14 @@ app.use(cors());
 app.get("/node",(req,res)=>{
   res.status(300).send("welcome to backend")
 })
+
 //cricket st
-app.get('/a', async (req, res) => {
+
+//this route is for cricket data sportmonks dream11 project
+app.get('/country-name/:name', async (req, res) => {
   try {
-    const apiUrl = 'https://cricket.sportmonks.com/api/v2.0/countries?api_token=3YvOGBxfpVp5rBLAJM6OHIYtUUNXVT9xgENN5C0vswNA1wuIfMoMRqSQe8jh&filter[name]=pakistan';
+    let {name}=req.params
+    const apiUrl = `https://cricket.sportmonks.com/api/v2.0/countries?api_token=3YvOGBxfpVp5rBLAJM6OHIYtUUNXVT9xgENN5C0vswNA1wuIfMoMRqSQe8jh&filter[name]=${name}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     res.json(data);
@@ -36,6 +40,20 @@ app.get('/a', async (req, res) => {
     res.status(500).json({ error: 'An error occurred' });
   }
 });
+
+//this route is for cricket data sportmonks dream11 project
+app.get('/country-id/:id', async (req, res) => {
+  try {
+    let {id}=req.params
+    const apiUrl = `https://cricket.sportmonks.com/api/v2.0/players?api_token=3YvOGBxfpVp5rBLAJM6OHIYtUUNXVT9xgENN5C0vswNA1wuIfMoMRqSQe8jh&filter[country_id]=${id}`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
 //cricket end
 // into this routes
 app.use("/books",bookRoute)
