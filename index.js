@@ -23,7 +23,7 @@ app.use(cors());
 //   })
 // )
 app.get("/node",(req,res)=>{
-  res.status(300).send("welcome to backend")
+  res.json("welcome to backend")
 })
 
 //try NPCI
@@ -33,7 +33,7 @@ app.get("/callback",(req,res)=>{
     const transaction_ref_id = req.query.transaction_ref_id;
     const transaction_status = req.query.transaction_status;
   
- res.status(200).send(`Transaction ${transaction_status}`);
+ res.json(`Transaction ${transaction_status}`);
 })
 //try NPCI end
 //cricket st
